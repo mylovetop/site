@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xsi:schemaLocation="
+       http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop      http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/task	  http://www.springframework.org/schema/task/spring-task.xsd">
+
+
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:properties/param.properties</value>
+				<value>classpath*:properties/constant.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 数据源 -->
+	<import  resource="classpath:dataSource.xml" />
+    <!-- dao -->
+    <import resource="application-dao.xml" />
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!--ehcache 缓存-->
+    <import resource="classpath*:cache/cacheContext.xml"></import>
+
+    <bean id="testServiceTarget" class="com.springapp.mvc.test.TestServiceImpl"></bean>
+
+    <bean id="testService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target">
+            <ref bean="testServiceTarget"></ref>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>methodCachePointCut</value>
+                <value>methodCachePointCutAdvice</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--任务调度-->
+    <import resource="classpath:quartz/quartz.xml"></import>
+
+</beans>

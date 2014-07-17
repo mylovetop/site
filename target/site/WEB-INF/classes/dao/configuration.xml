@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration   
+    	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   
+    	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings> 
+        <!-- changes from the defaults -->  
+        <setting name="lazyLoadingEnabled" value="false" />
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    <typeAliases>
+        <!--此处默认路径是main.java 下面的-->
+        <typeAlias type="com.site.vo.UserInfoVO" alias="userInfoVO"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="com/site/dao/UserInfoDao.xml"/>
+    </mappers>
+
+</configuration>

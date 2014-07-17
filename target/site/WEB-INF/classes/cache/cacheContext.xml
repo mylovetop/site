@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--引用cache的配置-->
+    <bean id="defaultCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation">
+            <value>classpath:cache/ehcache.xml</value>
+        </property>
+    </bean>
+
+    <!--自定义ehcache工厂，并设置所使用的Cache name-->
+    <bean id="ehCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <property name="cacheManager">
+            <ref bean="defaultCacheManager"></ref>
+        </property>
+        <property name="cacheName"><!--如果cacheName属性内设置的name在ehCache.xml中无法找到，那么将使用默认的cache(defaultCache标签定义). -->
+            <value>DEFAULT_CACHE</value>
+        </property>
+    </bean>
+
+    <!--find/create拦截器-->
+    <bean id="methodCacheInterceptor" class="com.site.Interceptor.MethodCacheInterceptor">
+        <property name="cache">
+            <ref bean="ehCache"></ref>
+        </property>
+    </bean>
+
+    <!--flush cache 拦截器-->
+    <bean id="methodCacheAfterAdvice" class="com.site.Interceptor.MethodCacheAfterAdvice">
+        <property name="cache">
+            <ref bean="ehCache"></ref>
+        </property>
+    </bean>
+
+    <!--创建了两个"切入点"，methodCachePointCut和methodCachePointCutAdvice，分别用于拦截不同方法名的方法，可以根据需要任意增加所需要拦截方法的名称。 -->
+    <bean id="methodCachePointCut" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice">
+            <ref bean="methodCacheInterceptor"></ref>
+        </property>
+        <property name="patterns">
+            <list>
+                <value>.*find.*</value>
+                <value>.*get.*</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="methodCachePointCutAdvice" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice">
+            <ref bean="methodCacheAfterAdvice"></ref>
+        </property>
+        <property name="patterns">
+            <list>
+                <value>.*create.*</value>
+                <value>.*update.*</value>
+                <value>.*delete.*</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
