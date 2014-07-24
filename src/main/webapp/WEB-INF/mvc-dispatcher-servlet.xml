@@ -31,14 +31,14 @@
 
 
     <!-- 对静态资源的访问 方案一 （二选一） -->
-    <!-- <mvc:default-servlet-handler/> -->
+    <!--<mvc:default-servlet-handler/>-->
 
     <!-- 对静态资源的访问 方案二 （二选一）  cache-period="31556926" 设置浏览器客户端缓存时间一年-->
     <!-- <mvc:resources location="/images/" mapping="/images/**" cache-period="31556926"/>
     <mvc:resources location="/css/" mapping="/css/**" cache-period="31556926"/>
     <mvc:resources location="/js/" mapping="/js/**" cache-period="31556926"/>
      -->
-    <mvc:resources location="/WEB-INF/pages/rescource/**" mapping="/WEB-INF/jsp/rescource/**" cache-period="31556926"/>
+    <mvc:resources location="/resource/" mapping="/resource/**" cache-period="31556926"/>
 
     <!--&lt;!&ndash; 处理文件上传 &ndash;&gt;-->
     <bean id="multipartResolver"

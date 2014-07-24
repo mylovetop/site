@@ -26,7 +26,7 @@ public class FileUploadController implements ServletContextAware {
 	@RequestMapping(value="fileUpload/upload", method = RequestMethod.POST)
 	public String handleUploadData(String name, @RequestParam("file") CommonsMultipartFile file){
 		if(!file.isEmpty()){
-			String path = this.servletContext.getRealPath("/upload/");//获取本地存储路径
+			String path = this.servletContext.getRealPath("/WEB-INF/upload/");//获取本地存储路径
 			System.out.println(path);
 			
 			String fileName = file.getOriginalFilename();

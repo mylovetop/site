@@ -11,6 +11,6 @@
     <title></title>
 </head>
 <body>
-  dfd dfdsfs${userInfoVO.userName}
+  dfd 中文${userInfoVO.userName}
 </body>
 </html>
