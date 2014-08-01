@@ -8002,6 +8002,11 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                 imageUrl = this.getOpt('imageUrl'),
                 serverUrl = this.getOpt('serverUrl');
 
+            //当为config 时，发送 "/ueditor2/controller.jsp?action=config" 请求给服务器 验证 后台上传配置是否正确
+            if(action !== 'config'){
+                return actionName;
+            }
+
             if(!serverUrl && imageUrl) {
                 serverUrl = imageUrl.replace(/^(.*[\/]).+([\.].+)$/, '$1controller$2');
             }

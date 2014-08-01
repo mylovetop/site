@@ -158,6 +158,13 @@
             <artifactId>lucene-core</artifactId>
             <version>4.9.0</version>
         </dependency>
+
+        <!--jackson-->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
     </dependencies>
 
     <build>

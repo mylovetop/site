@@ -16,13 +16,14 @@
         这里写你的初始化内容
     </script>
 <!-- 配置文件 -->
-<script type="text/javascript" src="resource/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/resource/js/ueditor/ueditor.config.js"></script>
 <!-- 编辑器源码文件 -->
-<script type="text/javascript" src="resource/js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/resource/js/ueditor/ueditor.all.js"></script>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
+//    window.UEDITOR_HOME_URL = '/resource/js/ueditor/';
     var ue = UE.getEditor('container');
 </script>
-lsfjlsjflsfjlsjfls
+
 </body>
 </html>

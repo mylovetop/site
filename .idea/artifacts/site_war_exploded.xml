@@ -35,6 +35,8 @@
           <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache:2.8.3" />
           <element id="library" level="project" name="Maven: org.quartz-scheduler:quartz:2.2.1" />
           <element id="library" level="project" name="Maven: org.apache.lucene:lucene-core:4.9.0" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" />
         </element>
       </element>
     </root>
