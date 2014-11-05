@@ -21,7 +21,7 @@
 <appender name="myFile" class="org.apache.log4j.DailyRollingFileAppender">
 
     <!--日志文件路径和文件名称 -->
-    <!-- 加../在logs,加/在C盘,不加在bin目录 -->
+    <!-- 加../在logs,加/在C盘,不加默认在tomcat/bin目录 -->
     <!--
       如果在加载时设置了变量System.setProperty("WebApp", appRoot)，
        可在此取出来${WebApp} -->
