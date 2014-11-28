@@ -27,6 +27,14 @@
         </property>
     </bean>
 
+    <!--2014-11-28-->
+    <!--find/create拦截器-->
+    <bean id="methodCacheInterceptorAnnotation" class="com.site.Interceptor.MethodCacheInterceptorAnnotation">
+        <property name="cache">
+            <ref bean="ehCache"></ref>
+        </property>
+    </bean>
+    <!--2014-11-28 end-->
     <!--flush cache 拦截器-->
     <bean id="methodCacheAfterAdvice" class="com.site.Interceptor.MethodCacheAfterAdvice">
         <property name="cache">

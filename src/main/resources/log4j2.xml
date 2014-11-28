@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOGGER" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<!--2014-11-28-->
+<log4j:configuration>
+    <!-- 控制台输出 -->
+    <appender name="myConsole" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss}(%F:%L)[%-5p] %m%n" />
+        </layout>
+    </appender>
+    <!-- 文件输出 -->
+    <appender name="R" class="org.apache.log4j.FileAppender">
+        <param name="File" value="info.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss}(%F:%L)[%-3p] %m%n" />
+        </layout>
+    </appender>
+
+    <!--输出方式是：每天一个日志文件-->
+    <!--设置通道名称是：file，输出方式DailyRollingFileAppender-->
+    <appender name="myFile" class="org.apache.log4j.DailyRollingFileAppender">
+
+        <!--日志文件路径和文件名称 -->
+        <!-- 加../在logs,加/在C盘,不加在bin目录 -->
+        <!--
+          如果在加载时设置了变量System.setProperty("WebApp", appRoot)，
+           可在此取出来${WebApp} -->
+        <!-- <param name="File" value="/Users/admin/Desktop/spring/Java/devv/ZWeb/WebContent/WEN-INF/logs/log.log"/> -->
+        <param name="File" value="logs/weixin/log.log"/>
+
+
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+        <param name="Append" value="false"/>
+
+        <!-- Rollover at midnight each day -->
+        <!-- e.g. mylog.log.2009-11-25.log -->
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+
+        <!-- Rollover at the top of each hour
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'"/>
+        -->
+
+        <layout class="org.apache.log4j.PatternLayout">
+
+            <!--
+              The default pattern: Date Priority [Category] Message\n
+            -->
+            <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>
+
+            <!--
+              The full pattern: Date MS Priority [Category] (Thread:NDC) Message\n -->
+            <!--
+            <param name="ConversionPattern" value="%d %-5r %-5p [%c] (%t:%x) %m%n"/>
+             -->
+        </layout>
+        <!--过滤器设置输出的级别-->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="warn" />
+            <param name="levelMax" value="error" />
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
+    </appender>
+
+
+    <!-- 设置日志输出级别 -->
+    <category name="java.sql">
+        <priority value="debug" />
+    </category>
+    <category name="com.ibatis">
+        <priority value="debug" />
+    </category>
+    <category name="com">
+        <priority value="debug" />
+    </category>
+    <category name="org.springframework.web">
+        <priority value="debug" />
+    </category>
+    <root>
+        <!--<priority value="error" />-->
+        <level value="error"/>
+        <appender-ref ref="myConsole" />
+        <appender-ref ref="myFile"/>
+    </root>
+</log4j:configuration>
